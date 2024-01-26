@@ -1,38 +1,101 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] CardController[] cardControllers;
 
-    private void Update()
+    GameManager _gameManager;
+    CardController _currentCard;
+    King _king;
+    int _playerScore;
+    int _rivalScore;
+
+    void Start()
     {
-        //CheckForCards();
+        _king = new King();
+        _gameManager = GameManager.Instance;
+        _gameManager.OnPlayerAwait += GM_OnPlayerAwait;
+        _gameManager.OnPlayerChooses += GM_OnPlayerChooses; ;
+
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    Debug.Log(_king.GetReaction((JokeType)i));
+        //}
+    }
+
+    void Update()
+    {
 
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            foreach (CardController c in cardControllers)
-            {
-                c.SetShowCard(!c.IsShowingCard);
-            }
+            _gameManager.SetGameState(GameState.PlayerChooses);
         }
     }
 
-    //private void CheckForCards()
-    //{
-    //    Vector2 mousePos = Input.mousePosition;
-    //    mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+    public void ChooseCard(CardController card)
+    {
+        Debug.Log(card.gameObject.name + " has been chosen.");
 
-    //    RaycastHit2D[] tempHitArray = Physics2D.RaycastAll(mousePos, Vector2.zero, .1f, 1 << 6);
-    //    if (tempHitArray.Length <= 0)
-    //    {
+        SelectOnlyOneCard(card);
 
-    //    }
+        card.SetButtonEnablity(false);
 
-    //    RaycastHit2D hit = tempHitArray[0];
+        foreach (CardController c in cardControllers)
+        {
+            if (c != card) c.SetShowCard(false);
+        }
 
-    //    hit.Hover();
-    //}
+        _currentCard = card;
+
+        _gameManager.AdvanceGameState();
+    }
+
+    void GM_OnPlayerAwait()
+    {
+        StartCoroutine(AwaitCardReaction());
+    }
+    public IEnumerator AwaitCardReaction()
+    {
+        yield return new WaitForSeconds(2);
+
+        string fun = _currentCard.CurrentJoke.ToString();
+        fun.Replace('_', ' ');
+
+        Debug.Log("The joke was " + fun + "!");
+        yield return new WaitForSeconds(1);
+
+        _gameManager.AdvanceGameState();
+    }
+
+    void GM_OnPlayerChooses()
+    {
+
+    }
+
+    void SetEnabledOfAllCards(bool setTo)
+    {
+        foreach (CardController c in cardControllers)
+        {
+            if (c.gameObject.TryGetComponent(out Button button))
+            {
+                button.interactable = setTo;
+            }
+        }
+    }
+    void SelectOnlyOneCard(CardController cardToSelect)
+    {
+        foreach (CardController c in cardControllers)
+        {
+            if (c.gameObject.TryGetComponent(out Button button))
+            {
+                bool setTo = c == cardToSelect;
+                button.interactable = setTo;
+            }
+        }
+    }
 }
