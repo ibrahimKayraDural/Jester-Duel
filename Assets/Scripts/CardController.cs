@@ -13,6 +13,7 @@ public class CardController : MonoBehaviour
     [SerializeField] Transform _ShowPosition;
     [SerializeField] Transform _HidePosition;
     [SerializeField, Min(0)] float _IterationWaitSeconds = .1f;
+    [SerializeField] Language _Language;
 
     Joke _currentJoke;
     bool _isShowingCard;
@@ -22,7 +23,13 @@ public class CardController : MonoBehaviour
     {
         _currentJoke = joke;
 
-        _JokeText.text = _currentJoke.JokeText;
+        foreach (LanguagedText lText in CurrentJoke.JokeTexts)
+        {
+            if(_Language == lText.Language)
+            {
+                _JokeText.text = lText.Text;
+            }
+        }
     }
     public void SetShowCard(bool setTo)
     {
