@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     GameManager _gameManager;
     CardController _currentCard;
     King _king;
+    JokeDatabase _jokeDatabase;
     int _playerScore;
     int _rivalScore;
 
@@ -45,10 +46,7 @@ public class PlayerManager : MonoBehaviour
 
         card.SetButtonEnablity(false);
 
-        foreach (CardController c in cardControllers)
-        {
-            if (c != card) c.SetShowCard(false);
-        }
+        SetShownnesOfAllCardsButOne(false, card);
 
         _currentCard = card;
 
@@ -61,6 +59,8 @@ public class PlayerManager : MonoBehaviour
     }
     public IEnumerator AwaitCardReaction()
     {
+        
+
         yield return new WaitForSeconds(2);
 
         string fun = _currentCard.CurrentJoke.ToString();
@@ -74,10 +74,32 @@ public class PlayerManager : MonoBehaviour
 
     void GM_OnPlayerChooses()
     {
-
+        SetNewJokesForAllCards();
+        SetEnablityOfAllCards(true);
+        SetShownnesOfAllCards(true);
     }
-
-    void SetEnabledOfAllCards(bool setTo)
+    void SetNewJokesForAllCards()
+    {
+        foreach (CardController c in cardControllers)
+        {
+            c.SetJoke(_jokeDatabase.GetAndUseRandomJoke());
+        }
+    }
+    void SetShownnesOfAllCards(bool setTo)
+    {
+        foreach (CardController c in cardControllers)
+        {
+            c.SetShowCard(setTo);
+        }
+    }
+    void SetShownnesOfAllCardsButOne(bool setTo, CardController card)
+    {
+        foreach (CardController c in cardControllers)
+        {
+            if(c != card) c.SetShowCard(setTo);
+        }
+    }
+    void SetEnablityOfAllCards(bool setTo)
     {
         foreach (CardController c in cardControllers)
         {
