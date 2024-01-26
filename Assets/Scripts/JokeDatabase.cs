@@ -6,7 +6,7 @@ public class JokeDatabase : MonoBehaviour
 {
     public static JokeDatabase Instance;
 
-    List<Joke> UnusedJokes;
+    [SerializeField] List<Joke> UnusedJokes;
     List<Joke> UsedJokes;
 
     void Awake()
@@ -26,4 +26,7 @@ public class JokeDatabase : MonoBehaviour
 
         return joke;
     }
+
+    public int JokesLeft() => UnusedJokes.Count;
+    public int UnusedJokesLeft() => UnusedJokes.Count;
 }

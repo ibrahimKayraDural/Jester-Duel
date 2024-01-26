@@ -7,6 +7,11 @@ public enum JokeType { King, Queen, Vizier, KingsChildren, DirtyJoke, Citizens, 
 [CreateAssetMenu(menuName = "New Joke")]
 public class Joke : ScriptableObject
 {
+    public JokeType JokeType => _JokeType;
+    public string JokeText_Turkish => _JokeText_Turkish;
+    public string JokeText_English => _JokeText_English;
+
     [SerializeField] JokeType _JokeType;
-    [SerializeField, TextArea(1,100), Multiline] string _Joke;
+    [SerializeField, TextArea(1,100), Multiline] string _JokeText_Turkish;
+    [SerializeField, TextArea(1,100), Multiline] string _JokeText_English;
 }
