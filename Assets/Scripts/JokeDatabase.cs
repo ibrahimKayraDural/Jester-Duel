@@ -6,7 +6,11 @@ public class JokeDatabase : MonoBehaviour
 {
     public static JokeDatabase Instance;
 
-    List<Joke> UnusedJokes;
+    public int JokesLeft => UnusedJokes.Count;
+    public int UsedJokeCount => UsedJokes.Count;
+
+
+    [SerializeField] List<Joke> UnusedJokes;
     List<Joke> UsedJokes;
 
     void Awake()
@@ -17,6 +21,12 @@ public class JokeDatabase : MonoBehaviour
 
     public Joke GetAndUseRandomJoke()
     {
+        if (JokesLeft <= 0)
+        {
+            Debug.Log("No Joke Left");
+            ReuseJokes();
+        }
+
         int index = Random.Range(0, UnusedJokes.Count);
 
         Joke joke = UnusedJokes[index];
@@ -25,5 +35,10 @@ public class JokeDatabase : MonoBehaviour
         UsedJokes.Add(joke);
 
         return joke;
+    }
+
+    public void ReuseJokes()
+    {
+        UnusedJokes = UsedJokes;
     }
 }
