@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,9 @@ public class JokeDatabase : MonoBehaviour
     public static JokeDatabase Instance;
 
     public int JokesLeft => UnusedJokes.Count;
-    public int UsedJokeCount => UsedJokes.Count;
-
 
     [SerializeField] List<Joke> UnusedJokes;
-    List<Joke> UsedJokes;
+    List<Joke> UsedJokes = new List<Joke>();
 
     void Awake()
     {
@@ -23,7 +22,7 @@ public class JokeDatabase : MonoBehaviour
     {
         if (JokesLeft <= 0)
         {
-            Debug.Log("No Joke Left");
+            Debug.Log("No Joke Left. Reshuffling jokes");
             ReuseJokes();
         }
 
@@ -31,8 +30,8 @@ public class JokeDatabase : MonoBehaviour
 
         Joke joke = UnusedJokes[index];
 
-        UnusedJokes.RemoveAt(index);
         UsedJokes.Add(joke);
+        UnusedJokes.RemoveAt(index);
 
         return joke;
     }
@@ -40,5 +39,6 @@ public class JokeDatabase : MonoBehaviour
     public void ReuseJokes()
     {
         UnusedJokes = UsedJokes;
+        UsedJokes = new List<Joke>();
     }
 }

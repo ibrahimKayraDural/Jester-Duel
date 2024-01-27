@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6047112762636096630}
   - component: {fileID: 7010972500080800189}
+  - component: {fileID: 1718170161761741565}
   - component: {fileID: 5729597971790774567}
   - component: {fileID: 7134245302759205298}
   m_Layer: 6
@@ -126,9 +127,20 @@ MonoBehaviour:
   _JokeText: {fileID: 2494281216235454707}
   _ShowPosition: {fileID: 0}
   _HidePosition: {fileID: 0}
-  _IterationWaitSeconds: 0.008
-  _Language: 0
   _Button: {fileID: 5729597971790774567}
+  _Mover: {fileID: 1718170161761741565}
+--- !u!114 &1718170161761741565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737146362341323170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4860833b3042a4ebbe6aea0308369d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5729597971790774567
 MonoBehaviour:
   m_ObjectHideFlags: 0

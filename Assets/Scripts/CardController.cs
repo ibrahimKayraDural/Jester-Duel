@@ -13,11 +13,12 @@ public class CardController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _JokeText;
     [SerializeField] Transform _ShowPosition;
     [SerializeField] Transform _HidePosition;
-    [SerializeField, Min(0)] float _IterationWaitSeconds = .1f;
-    [SerializeField] Language _Language;
     [SerializeField] Button _Button;
+    [SerializeField] Mover _Mover;
 
     Joke _currentJoke;
+    Language _language;
+    float _iterationWaitSeconds = .008f;
     bool _isShowingCard;
     bool _isMoving;
 
@@ -27,7 +28,7 @@ public class CardController : MonoBehaviour
 
         foreach (LanguagedText lText in CurrentJoke.JokeTexts)
         {
-            if(_Language == lText.Language)
+            if(_language == lText.Language)
             {
                 _JokeText.text = lText.Text;
             }
@@ -40,34 +41,14 @@ public class CardController : MonoBehaviour
         Transform targetTransform = setTo ? _ShowPosition : _HidePosition;
         _isShowingCard = setTo;
 
-        Vector2 targetPosition = transform.position;
-        targetPosition.y = targetTransform.position.y;    
-        
-        if(refKey_GoToPosition != null) StopCoroutine(refKey_GoToPosition);
-        refKey_GoToPosition = GoToPosition(targetPosition);
-        StartCoroutine(refKey_GoToPosition);
+        Vector2 targetPosition = targetTransform.position;
+
+        _Mover.TryMove(targetPosition, _iterationWaitSeconds);
     }
     public void SetButtonEnablity(bool setTo)
     {
         _Button.enabled = setTo;
     }
-
-    IEnumerator refKey_GoToPosition;
-    IEnumerator GoToPosition(Vector2 position) 
-    {
-        _isMoving = true;
-
-        Vector2 targetVector = position - (Vector2)transform.position;
-        Vector2 moveFraction = targetVector.normalized * .1f;
-        int iteration = Mathf.CeilToInt(targetVector.magnitude / moveFraction.magnitude);
-        
-        for(int i = 0; i < iteration; i++)
-        {
-            transform.position = transform.position + (Vector3)moveFraction;
-            yield return new WaitForSeconds(_IterationWaitSeconds);
-        }
-
-        transform.position = position;
-        _isMoving = false;
-    }
+    public void SetIterationSpeed(float setTo) => _iterationWaitSeconds = setTo;
+    public void SetLanguage(Language language) => _language = language;
 }

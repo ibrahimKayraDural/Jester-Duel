@@ -7,20 +7,25 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] CardController[] cardControllers;
+    [Min(0)] public float CardIterationWaitSeconds = .008f;
+    public Language CardLanguage;
 
     GameManager _gameManager;
     CardController _currentCard;
-    King _king;
     JokeDatabase _jokeDatabase;
-    int _playerScore;
-    int _rivalScore;
 
     void Start()
     {
-        _king = new King();
+        _jokeDatabase = JokeDatabase.Instance;
+
         _gameManager = GameManager.Instance;
         _gameManager.OnPlayerAwait += GM_OnPlayerAwait;
-        _gameManager.OnPlayerChooses += GM_OnPlayerChooses; ;
+        _gameManager.OnPlayerChooses += GM_OnPlayerChooses;
+        _gameManager.OnRivalsTurn += GM_OnEnemysTurn;
+
+        SetCardValues();
+
+       StartCoroutine(StartGame());
 
         //for (int i = 0; i < 10; i++)
         //{
@@ -28,14 +33,13 @@ public class PlayerManager : MonoBehaviour
         //}
     }
 
-    void Update()
+    IEnumerator StartGame()
     {
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _gameManager.SetGameState(GameState.PlayerChooses);
-        }
+        yield return new WaitForSeconds(1);
+
+        _gameManager.SetGameState(GameState.PlayerChooses);
     }
 
     public void ChooseCard(CardController card)
@@ -43,14 +47,18 @@ public class PlayerManager : MonoBehaviour
         Debug.Log(card.gameObject.name + " has been chosen.");
 
         SelectOnlyOneCard(card);
-
         card.SetButtonEnablity(false);
-
         SetShownnesOfAllCardsButOne(false, card);
 
         _currentCard = card;
 
         _gameManager.AdvanceGameState();
+    }
+
+    private void GM_OnEnemysTurn()
+    {
+        SetEnablityOfAllCards(false);
+        SetShownnesOfAllCards(false);
     }
 
     void GM_OnPlayerAwait()
@@ -60,18 +68,37 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator AwaitCardReaction()
     {
         
+        //[SFX] drumroll
 
         yield return new WaitForSeconds(2);
 
-        string fun = _currentCard.CurrentJoke.ToString();
-        fun.Replace('_', ' ');
+        //[SFX] reaction sound
+
+        Joke joke = _currentCard.CurrentJoke;
+        FunDegree fun = _gameManager.KingRef.GetReaction(joke.JokeType);
+
+        _gameManager.AddToPlayerScore((int)fun);
+
+        string funString = fun.ToString();
+        funString.Replace("_"," ");
 
         Debug.Log("The joke was " + fun + "!");
+
+
         yield return new WaitForSeconds(1);
+
 
         _gameManager.AdvanceGameState();
     }
 
+    void SetCardValues()
+    {
+        foreach (CardController c in cardControllers)
+        {
+            c.SetIterationSpeed(CardIterationWaitSeconds);
+            c.SetLanguage(CardLanguage);
+        }
+    }
     void GM_OnPlayerChooses()
     {
         SetNewJokesForAllCards();
@@ -106,6 +133,7 @@ public class PlayerManager : MonoBehaviour
             if (c.gameObject.TryGetComponent(out Button button))
             {
                 button.interactable = setTo;
+                c.SetButtonEnablity(true);
             }
         }
     }
