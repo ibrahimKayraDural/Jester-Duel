@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: Queen 3
+  m_EditorClassIdentifier: 
+  _JokeType: 1
+  _JokeTexts:
+  - Language: 0
+    Text: "Krali\xE7e neden mutsuzmu\u015F?\r\n\r\nKrall\u0131kta harem varm\u0131\u015F."
+  - Language: 1
+    Text: 'Why was the queen sad?
+
+      
+
+      Because the kingdom had a harem.'

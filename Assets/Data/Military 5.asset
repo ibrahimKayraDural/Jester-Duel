@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: Military 5
+  m_EditorClassIdentifier: 
+  _JokeType: 8
+  _JokeTexts:
+  - Language: 0
+    Text: "Zengin sap\u0131klarla ve katillerle dolu hapishaneye ne denir?\n\nK\u0131\u015Fla."
+  - Language: 1
+    Text: 'What do you call a prison full of rich perverts and murderers?
+
+      
+
+      Barracks.'

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: King 2
+  m_EditorClassIdentifier: 
+  _JokeType: 0
+  _JokeTexts:
+  - Language: 0
+    Text: "Kral yeme\u011Fe o kadar ba\u011F\u0131ml\u0131ym\u0131\u015F ki, yemek
+      kar\u015F\u0131l\u0131\u011F\u0131nda toprak sat\u0131yormu\u015F."
+  - Language: 1
+    Text: The king was soo obsessed with food that he was selling land in exchange
+      for food.

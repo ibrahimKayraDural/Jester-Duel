@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: Court Kitchen 1
+  m_EditorClassIdentifier: 
+  _JokeType: 4
+  _JokeTexts:
+  - Language: 0
+    Text: "Saray yemekleri o kadar k\xF6t\xFCym\xFC\u015F ki kral\u0131 zehirlemeye
+      \xE7al\u0131\u015Fan a\u015F\xE7\u0131lar yeme\u011Fin kokusundan \xF6lm\xFC\u015Fler."
+  - Language: 1
+    Text: The palace's food were soo bad, that the cooks that tried to poison the
+      king died because of the smell.
