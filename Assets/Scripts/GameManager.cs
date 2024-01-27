@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         _roundsLeft = _RoundCount;
     }
 
+    public void StartGame() => SetGameState(GameState.PlayerChooses);
     public void AdvanceGameState()
     {
         switch (_state)
@@ -88,15 +89,15 @@ public class GameManager : MonoBehaviour
 
         //[SFX] drumroll
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(.1f);
 
         //select who won
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.1f);
 
         // other one dies
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(.1f);
 
         // curtain
 
@@ -104,6 +105,6 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Game ended");
 
-        // Open menu scene
+        FindObjectOfType<CurtainController>().CloseCurtain();
     }
 }

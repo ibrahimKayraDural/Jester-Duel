@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
   m_Name: Nobles 3
   m_EditorClassIdentifier: 
-  _JokeType: 0
+  _JokeType: 7
   _JokeTexts:
   - Language: 0
     Text: "Soylular\u0131n ve fakirlerin ortak \xF6zelli\u011Fi nedir?\n\nSoylulardan
@@ -20,7 +20,7 @@ MonoBehaviour:
   - Language: 1
     Text: 'What do the noble and the poor have in common?
 
-      
 
-      Both of
-      them hate the nobles.'
+
+      Both of them hate
+      the nobles.'

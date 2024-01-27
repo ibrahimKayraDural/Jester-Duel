@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
   m_Name: Citizens 5
   m_EditorClassIdentifier: 
-  _JokeType: 0
+  _JokeType: 5
   _JokeTexts:
   - Language: 0
     Text: "Zeki ve insanlara yard\u0131m etmesi seven k\xF6yl\xFCye ne denir?\n\nCad\u0131."
   - Language: 1
     Text: 'What do you call a peasant who is smart and likes to help people?
 
-      
+
 
       Witch.'

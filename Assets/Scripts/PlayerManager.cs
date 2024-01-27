@@ -25,21 +25,10 @@ public class PlayerManager : MonoBehaviour
 
         SetCardValues();
 
-       StartCoroutine(StartGame());
-
         //for (int i = 0; i < 10; i++)
         //{
         //    Debug.Log(_king.GetReaction((JokeType)i));
         //}
-    }
-
-    IEnumerator StartGame()
-    {
-
-
-        yield return new WaitForSeconds(1);
-
-        _gameManager.SetGameState(GameState.PlayerChooses);
     }
 
     public void ChooseCard(CardController card)

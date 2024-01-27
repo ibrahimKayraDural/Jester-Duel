@@ -44,3 +44,6 @@ TagManager:
   - name: Card
     uniqueID: 1861148557
     locked: 0
+  - name: Curtain
+    uniqueID: 576871619
+    locked: 0

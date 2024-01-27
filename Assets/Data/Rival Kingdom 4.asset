@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
   m_Name: Rival Kingdom 4
   m_EditorClassIdentifier: 
-  _JokeType: 0
+  _JokeType: 6
   _JokeTexts:
   - Language: 0
     Text: "Duydu\u011Fum kadar\u0131yla rakip kral\u0131n e\u015Fe\u011Fi \xF6lm\xFC\u015F.
