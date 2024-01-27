@@ -15,9 +15,12 @@ public class GameManager : MonoBehaviour
     public GameState State => _state;
     public King KingRef => _king;
     public int RoundsLeft => _roundsLeft;
+    public GameObject DrumrollSFX => _DrumrollSFX;
 
     [SerializeField] int _RoundCount;
     [SerializeField] GameObject _GuillotineSFX;
+    [SerializeField] GameObject _DrumrollSFX;
+    [SerializeField] GameObject _TrumpetSFX;
 
     GameState _state;
     int _playerScore;
@@ -88,13 +91,18 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting end");
 
-        //[SFX] drumroll
+        Instantiate(_TrumpetSFX);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.8f);
+
+        Instantiate(DrumrollSFX);
+
+        yield return new WaitForSeconds(2.8f);
 
         //select who won
-        string whoWon = _playerScore >= _rivalScore ? "Player" : "Rival";
-        Debug.Log(whoWon+" won!");
+        bool playerHasWon = _playerScore >= _rivalScore;
+        string whoWon = playerHasWon ? "Player" : "Rival";
+        Debug.Log(whoWon + " won!");
 
         yield return new WaitForSeconds(1f);
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RivalManager : MonoBehaviour
 {
     [SerializeField] CardController card;
+    [SerializeField] GameObject _CardSlideSFX;
 
     GameManager _gameManager;
     JokeDatabase _jokeDatabase;
@@ -33,12 +34,18 @@ public class RivalManager : MonoBehaviour
         Joke joke = _jokeDatabase.GetAndUseRandomJoke();
         card.SetJoke(joke);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
+
+        Instantiate(_CardSlideSFX);
 
         _animator.Play("in", -1, 0);
         card.SetShowCard(true);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+
+        Instantiate(_gameManager.DrumrollSFX);
+
+        yield return new WaitForSeconds(2.8f);
 
         FunDegree fun = _gameManager.KingRef.GetJokeFunDegree(joke.JokeType);
 

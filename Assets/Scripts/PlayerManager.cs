@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] CardController[] cardControllers;
     [Min(0)] public float CardIterationWaitSeconds = .008f;
     public Language CardLanguage;
+
+    [SerializeField] CardController[] cardControllers;
+    [SerializeField] GameObject _CardSelectSFX;
+    [SerializeField] GameObject _CardShuffleSFX;
 
     GameManager _gameManager;
     CardController _currentCard;
@@ -35,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log(card.gameObject.name + " has been chosen.");
 
+        Instantiate(_CardSelectSFX);
+
         SelectOnlyOneCard(card);
         card.SetButtonEnablity(false);
         SetShownnesOfAllCardsButOne(false, card);
@@ -56,10 +61,10 @@ public class PlayerManager : MonoBehaviour
     }
     public IEnumerator AwaitCardReaction()
     {
-        
-        //[SFX] drumroll
 
-        yield return new WaitForSeconds(2);
+        Instantiate(_gameManager.DrumrollSFX);
+
+        yield return new WaitForSeconds(2.8f);
 
         Joke joke = _currentCard.CurrentJoke;
         FunDegree fun = _gameManager.KingRef.GetJokeFunDegree(joke.JokeType);
@@ -89,6 +94,8 @@ public class PlayerManager : MonoBehaviour
     }
     void GM_OnPlayerChooses()
     {
+        Instantiate(_CardShuffleSFX);
+
         SetNewJokesForAllCards();
         SetEnablityOfAllCards(true);
         SetShownnesOfAllCards(true);
