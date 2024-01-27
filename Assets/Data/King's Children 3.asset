@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: King's Children 3
+  m_EditorClassIdentifier: 
+  _JokeType: 3
+  _JokeTexts:
+  - Language: 0
+    Text: "Prens o kadar \u015Fi\u015Fkoymu\u015F ki tahta s\u0131\u011Famad\u0131\u011F\u0131
+      i\xE7in yeni bir kral ba\u015Fa gelememi\u015F."
+  - Language: 1
+    Text: 'The prince was soo fat that because he couldn''t fit to throne, there
+      was no new king.
+
+'

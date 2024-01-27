@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28463c21b1aefea469696e4499eb4842, type: 3}
+  m_Name: Economy 2
+  m_EditorClassIdentifier: 
+  _JokeType: 9
+  _JokeTexts:
+  - Language: 0
+    Text: "Bence mutluluk sat\u0131n al\u0131nabilir demek \xE7ok yanl\u0131\u015F
+      bir \u015Fey. \xC7\xFCnk\xFC \u015Fuanki ekonomide paraya da mutlulu\u011Fa
+      da sahip olamazs\u0131n\u0131z."
+  - Language: 1
+    Text: I think it's very wrong to say that happiness can be bought, because in
+      the current economy you can't have money and you can't have happiness.
