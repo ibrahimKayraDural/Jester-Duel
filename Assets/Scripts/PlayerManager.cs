@@ -25,10 +25,10 @@ public class PlayerManager : MonoBehaviour
 
         SetCardValues();
 
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Debug.Log(_king.GetReaction((JokeType)i));
-        //}
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log((JokeType)i + " is "+_gameManager.KingRef.GetJokeFunDegree((JokeType)i));
+        }
     }
 
     public void ChooseCard(CardController card)
@@ -61,18 +61,17 @@ public class PlayerManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        //[SFX] reaction sound
-
         Joke joke = _currentCard.CurrentJoke;
-        FunDegree fun = _gameManager.KingRef.GetReaction(joke.JokeType);
+        FunDegree fun = _gameManager.KingRef.GetJokeFunDegree(joke.JokeType);
 
         _gameManager.AddToPlayerScore((int)fun);
 
         string funString = fun.ToString();
-        funString.Replace("_"," ");
+        funString = funString.Replace("_"," ");
 
-        Debug.Log("The joke was " + fun + "!");
+        Debug.Log("The " + joke.JokeType + " joke was " + funString + "!");
 
+        Instantiate(_gameManager.KingRef.GetReactionSFX(fun));
 
         yield return new WaitForSeconds(1);
 

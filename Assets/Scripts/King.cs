@@ -6,7 +6,8 @@ using System.Runtime;
 
 public class King
 {
-    Dictionary<JokeType, FunDegree> JokeReactions = new Dictionary<JokeType, FunDegree>();
+    Dictionary<JokeType, FunDegree> _jokeReactions = new Dictionary<JokeType, FunDegree>();
+    Dictionary<FunDegree, GameObject> _reactionSFX = new Dictionary<FunDegree, GameObject>();
 
     public King()
     {
@@ -24,17 +25,25 @@ public class King
         }
         //^^^
 
-        JokeReactions.Add((JokeType)randomNumbers[0], FunDegree.The_Best);
-        JokeReactions.Add((JokeType)randomNumbers[1], FunDegree.The_Best);
-        JokeReactions.Add((JokeType)randomNumbers[2], FunDegree.Good);
-        JokeReactions.Add((JokeType)randomNumbers[3], FunDegree.Good);
-        JokeReactions.Add((JokeType)randomNumbers[4], FunDegree.Bland);
-        JokeReactions.Add((JokeType)randomNumbers[5], FunDegree.Bland);
-        JokeReactions.Add((JokeType)randomNumbers[6], FunDegree.Bad);
-        JokeReactions.Add((JokeType)randomNumbers[7], FunDegree.Bad);
-        JokeReactions.Add((JokeType)randomNumbers[8], FunDegree.The_Worst);
-        JokeReactions.Add((JokeType)randomNumbers[9], FunDegree.The_Worst);
+        _jokeReactions.Add((JokeType)randomNumbers[0], FunDegree.The_Best);
+        _jokeReactions.Add((JokeType)randomNumbers[1], FunDegree.The_Best);
+        _jokeReactions.Add((JokeType)randomNumbers[2], FunDegree.Good);
+        _jokeReactions.Add((JokeType)randomNumbers[3], FunDegree.Good);
+        _jokeReactions.Add((JokeType)randomNumbers[4], FunDegree.Bland);
+        _jokeReactions.Add((JokeType)randomNumbers[5], FunDegree.Bland);
+        _jokeReactions.Add((JokeType)randomNumbers[6], FunDegree.Bad);
+        _jokeReactions.Add((JokeType)randomNumbers[7], FunDegree.Bad);
+        _jokeReactions.Add((JokeType)randomNumbers[8], FunDegree.The_Worst);
+        _jokeReactions.Add((JokeType)randomNumbers[9], FunDegree.The_Worst);
+
+        for (int i = -2; i <= 2; i++)
+        {
+            FunDegree fun = (FunDegree)i;
+            _reactionSFX.Add(fun, Resources.Load<GameObject>("reaction_" + fun.ToString()));
+        }
     }
 
-    public FunDegree GetReaction(JokeType type) => JokeReactions[type];
+    public FunDegree GetJokeFunDegree(JokeType type) => _jokeReactions[type];
+    public GameObject GetReactionSFX(FunDegree fun) => _reactionSFX[fun];
+    public GameObject GetReactionSFX(JokeType type) => _reactionSFX[GetJokeFunDegree(type)];
 }

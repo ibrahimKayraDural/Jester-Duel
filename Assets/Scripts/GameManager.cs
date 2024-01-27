@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int RoundsLeft => _roundsLeft;
 
     [SerializeField] int _RoundCount;
+    [SerializeField] GameObject _GuillotineSFX;
 
     GameState _state;
     int _playerScore;
@@ -89,19 +90,18 @@ public class GameManager : MonoBehaviour
 
         //[SFX] drumroll
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1f);
 
         //select who won
+        string whoWon = _playerScore >= _rivalScore ? "Player" : "Rival";
+        Debug.Log(whoWon+" won!");
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1f);
 
         // other one dies
+        Instantiate(_GuillotineSFX);
 
-        yield return new WaitForSeconds(.1f);
-
-        // curtain
-
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3f);
 
         Debug.Log("Game ended");
 

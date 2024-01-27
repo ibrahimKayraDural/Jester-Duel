@@ -40,16 +40,16 @@ public class RivalManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        //[SFX] rection sound
-
-        FunDegree fun = _gameManager.KingRef.GetReaction(joke.JokeType);
+        FunDegree fun = _gameManager.KingRef.GetJokeFunDegree(joke.JokeType);
 
         _gameManager.AddToRivalScore((int)fun);
 
         string funString = fun.ToString();
-        funString.Replace("_", " ");
+        funString = funString.Replace("_", " ");
 
-        Debug.Log("The joke was " + fun + "!");
+        Debug.Log("The joke was " + funString + "!");
+
+        Instantiate(_gameManager.KingRef.GetReactionSFX(fun));
 
         yield return new WaitForSeconds(1);
 
