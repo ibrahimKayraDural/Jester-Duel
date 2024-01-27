@@ -6,6 +6,7 @@ public class RivalManager : MonoBehaviour
 {
     [SerializeField] CardController card;
     [SerializeField] GameObject _CardSlideSFX;
+    [SerializeField] GameObject _TalkSFX;
 
     GameManager _gameManager;
     JokeDatabase _jokeDatabase;
@@ -20,6 +21,11 @@ public class RivalManager : MonoBehaviour
         _animator = card.GetComponent<Animator>();
 
         card.SetButtonEnablity(false);
+
+        if (Prefs.Instance != null)
+        {
+            card.SetLanguage(Prefs.Instance.LanguagePref);
+        }
     }
 
     void GM_OnRivalsTurn()
@@ -43,6 +49,10 @@ public class RivalManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        Instantiate(_TalkSFX);
+
+        yield return new WaitForSeconds(3f);
+
         Instantiate(_gameManager.DrumrollSFX);
 
         yield return new WaitForSeconds(2.8f);
@@ -57,6 +67,7 @@ public class RivalManager : MonoBehaviour
         Debug.Log("The joke was " + funString + "!");
 
         Instantiate(_gameManager.KingRef.GetReactionSFX(fun));
+        IconManager.Instance.SpawnReactionIcon(fun);
 
         yield return new WaitForSeconds(1);
 

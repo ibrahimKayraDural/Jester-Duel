@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] CardController[] cardControllers;
     [SerializeField] GameObject _CardSelectSFX;
     [SerializeField] GameObject _CardShuffleSFX;
+    [SerializeField] GameObject _TalkSFX;
 
     GameManager _gameManager;
     CardController _currentCard;
@@ -30,7 +31,17 @@ public class PlayerManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            Debug.Log((JokeType)i + " is "+_gameManager.KingRef.GetJokeFunDegree((JokeType)i));
+            Debug.Log((JokeType)i + " is " + _gameManager.KingRef.GetJokeFunDegree((JokeType)i));
+        }
+
+        if (Prefs.Instance != null)
+        {
+            CardLanguage = Prefs.Instance.LanguagePref;
+
+            foreach (CardController card in cardControllers)
+            {
+                card.SetLanguage(CardLanguage);
+            }
         }
     }
 
@@ -61,6 +72,9 @@ public class PlayerManager : MonoBehaviour
     }
     public IEnumerator AwaitCardReaction()
     {
+        Instantiate(_TalkSFX);
+
+        yield return new WaitForSeconds(2f);
 
         Instantiate(_gameManager.DrumrollSFX);
 
@@ -77,6 +91,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("The " + joke.JokeType + " joke was " + funString + "!");
 
         Instantiate(_gameManager.KingRef.GetReactionSFX(fun));
+        IconManager.Instance.SpawnReactionIcon(fun);
 
         yield return new WaitForSeconds(1);
 
