@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public enum GameState { PlayerChooses, AwaitCardResult, EnemysTurn, GameEnded}
 public class GameManager : MonoBehaviour
@@ -21,6 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _GuillotineSFX;
     [SerializeField] GameObject _DrumrollSFX;
     [SerializeField] GameObject _TrumpetSFX;
+    [SerializeField] Transform _RivalExit;
+    [SerializeField] Mover _RivalMover;
+    [SerializeField] Transform _PlayerExit;
+    [SerializeField] Mover _PlayerMover;
+    [SerializeField] TextMeshProUGUI _WonTextMesh;
 
     GameState _state;
     int _playerScore;
@@ -101,15 +107,30 @@ public class GameManager : MonoBehaviour
 
         //select who won
         bool playerHasWon = _playerScore >= _rivalScore;
-        string whoWon = playerHasWon ? "Player" : "Rival";
-        Debug.Log(whoWon + " won!");
+
+        string whoWonENG = playerHasWon ? "You Won" : "You Lose";
+        string whoWonTR = playerHasWon ? "Kazandýn" : "Kaybettin";
+
+        if(Prefs.Instance != null)
+        {
+            _WonTextMesh.text = Prefs.Instance.LanguagePref == Language.Turkish ? whoWonTR : whoWonENG;
+        }
+
+        Debug.Log(whoWonENG);
+
+        yield return new WaitForSeconds(2f);
+
+        Transform targetTransform = playerHasWon ? _RivalExit : _PlayerExit;
+        Mover targetMover = playerHasWon ? _RivalMover : _PlayerMover;
+
+        targetMover.TryMove(targetTransform.position, 0.008f, false);
 
         yield return new WaitForSeconds(1f);
 
         // other one dies
         Instantiate(_GuillotineSFX);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         Debug.Log("Game ended");
 

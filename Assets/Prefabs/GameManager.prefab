@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152ffb92265f87540a8b94cfbf669b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RoundCount: 2
+  _RoundCount: 12
   _GuillotineSFX: {fileID: 1139363594214539088, guid: fa8ab273aa7aec84c97123db3ce35eeb, type: 3}
   _DrumrollSFX: {fileID: 1139363594214539088, guid: ebb59ab589c89724ab50320f38d3beb5, type: 3}
   _TrumpetSFX: {fileID: 8523691932645522486, guid: b0d8f4dda59abdd438b9f515982c864d, type: 3}
+  _RivalExit: {fileID: 0}
+  _RivalMover: {fileID: 0}
+  _PlayerExit: {fileID: 0}
+  _PlayerMover: {fileID: 0}
+  _WonTextMesh: {fileID: 0}
