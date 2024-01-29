@@ -108,12 +108,18 @@ public class GameManager : MonoBehaviour
         //select who won
         bool playerHasWon = _playerScore >= _rivalScore;
 
-        string whoWonENG = playerHasWon ? "You Won" : "You Lose";
         string whoWonTR = playerHasWon ? "Kazandýn" : "Kaybettin";
+        string whoWonENG = playerHasWon ? "You Won" : "You Lose";
 
-        if(Prefs.Instance != null)
+        if (Prefs.Instance != null)
         {
-            _WonTextMesh.text = Prefs.Instance.LanguagePref == Language.Turkish ? whoWonTR : whoWonENG;
+            switch (Prefs.Instance.LanguagePref)
+            {
+                case Language.Turkish:
+                    _WonTextMesh.text = whoWonTR; break;
+                case Language.English:
+                    _WonTextMesh.text = whoWonENG; break;
+            }
         }
 
         Debug.Log(whoWonENG);
